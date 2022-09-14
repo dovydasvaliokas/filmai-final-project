@@ -9,10 +9,11 @@ import java.util.List;
 @Repository
 public interface FilmasRepository extends JpaRepository<Filmas, Integer> {
 
+    Filmas findById(int id);
     Filmas findByPavadinimas(String pavadinimas);
     List<Filmas> findByMetai(short metai);
-    List<Filmas> findByRezisierius(String filmoRezisierius);
-    List<Filmas> findByZanras(String filmoZanras);
+    List<Filmas> findByFilmoRezisierius(String filmoRezisierius);
+    List<Filmas> findByFilmoZanrai(String filmoZanrai);
     List<Filmas> findAll();
 
 }

@@ -1,7 +1,5 @@
 package lt.viltiesziedas.filmai.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,8 +12,8 @@ public class Filmas {
 
     private String pavadinimas;
     private short metai;
-    private float imdb_rating;
-    private short trukme_min;
+    private float imdbRating;
+    private short trukmeMin;
 
     @Column(length = 3000, name = "aprasymas")
     private String aprasymas;
@@ -24,22 +22,26 @@ public class Filmas {
     @JoinColumn(name = "rezisieriaus_id")
     private Rezisierius filmoRezisierius;
 
-    @ManyToOne
-    @JoinColumn(name = "zanro_id")
-    private Zanras filmoZanras;
+    @ManyToMany
+    @JoinTable(
+            name = "filmo_zanrai",
+            joinColumns = @JoinColumn(name = "filmo_id"),
+            inverseJoinColumns = @JoinColumn(name = "zanro_id")
+    )
+    private Set<Zanras> filmoZanrai;
 
     public Filmas() {
     }
 
-    public Filmas(int id, String pavadinimas, short metai, float imdb_rating, short trukme_min, String aprasymas, Rezisierius filmoRezisierius, Zanras filmoZanras) {
+    public Filmas(int id, String pavadinimas, short metai, float imdbRating, short trukmeMin, String aprasymas, Rezisierius filmoRezisierius, Set<Zanras> filmoZanrai) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.metai = metai;
-        this.imdb_rating = imdb_rating;
-        this.trukme_min = trukme_min;
+        this.imdbRating = imdbRating;
+        this.trukmeMin = trukmeMin;
         this.aprasymas = aprasymas;
         this.filmoRezisierius = filmoRezisierius;
-        this.filmoZanras = filmoZanras;
+        this.filmoZanrai = filmoZanrai;
     }
 
     public int getId() {
@@ -66,20 +68,20 @@ public class Filmas {
         this.metai = metai;
     }
 
-    public float getImdb_rating() {
-        return imdb_rating;
+    public float getImdbRating() {
+        return imdbRating;
     }
 
-    public void setImdb_rating(float imdb_rating) {
-        this.imdb_rating = imdb_rating;
+    public void setImdbRating(float imdbRating) {
+        this.imdbRating = imdbRating;
     }
 
-    public short getTrukme_min() {
-        return trukme_min;
+    public short getTrukmeMin() {
+        return trukmeMin;
     }
 
-    public void setTrukme_min(short trukme_min) {
-        this.trukme_min = trukme_min;
+    public void setTrukmeMin(short trukmeMin) {
+        this.trukmeMin = trukmeMin;
     }
 
     public String getAprasymas() {
@@ -98,12 +100,12 @@ public class Filmas {
         this.filmoRezisierius = filmoRezisierius;
     }
 
-    public Zanras getFilmoZanras() {
-        return filmoZanras;
+    public Set<Zanras> getFilmoZanrai() {
+        return filmoZanrai;
     }
 
-    public void setFilmoZanras(Zanras filmoZanras) {
-        this.filmoZanras = filmoZanras;
+    public void setFilmoZanrai(Set<Zanras> filmoZanrai) {
+        this.filmoZanrai = filmoZanrai;
     }
 
     @Override
@@ -112,11 +114,11 @@ public class Filmas {
                 "id=" + id +
                 ", pavadinimas='" + pavadinimas + '\'' +
                 ", metai=" + metai +
-                ", imdb_rating=" + imdb_rating +
-                ", trukme_min=" + trukme_min +
+                ", imdbRating=" + imdbRating +
+                ", trukmeMin=" + trukmeMin +
                 ", aprasymas='" + aprasymas + '\'' +
                 ", filmoRezisierius=" + filmoRezisierius +
-                ", filmoZanras=" + filmoZanras +
+                ", filmoZanrai=" + filmoZanrai +
                 '}';
     }
 }

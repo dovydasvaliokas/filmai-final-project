@@ -12,7 +12,7 @@ public class Rezisierius {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String vardas_pavarde;
+    private String vardasPavarde;
 
     @JsonIgnore
     @OneToMany(mappedBy = "filmoRezisierius")
@@ -29,12 +29,12 @@ public class Rezisierius {
         this.id = id;
     }
 
-    public String getVardas_pavarde() {
-        return vardas_pavarde;
+    public String getVardasPavarde() {
+        return vardasPavarde;
     }
 
-    public void setVardas_pavarde(String vardas_pavarde) {
-        this.vardas_pavarde = vardas_pavarde;
+    public void setVardasPavarde(String vardasPavarde) {
+        this.vardasPavarde = vardasPavarde;
     }
 
     public Set<Filmas> getRezisieriausFilmai() {
@@ -49,7 +49,7 @@ public class Rezisierius {
     public String toString() {
         return "Rezisierius{" +
                 "id=" + id +
-                ", vardas_pavarde='" + vardas_pavarde + '\'' +
+                ", vardas_pavarde='" + vardasPavarde + '\'' +
                 ", rezisieriausFilmai=" + rezisieriausFilmai +
                 '}';
     }

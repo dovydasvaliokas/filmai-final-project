@@ -14,10 +14,22 @@ public class Zanras {
     private String pavadinimas;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "filmoZanras")
+    @ManyToMany
+    @JoinTable(
+            name = "filmo_zanrai",
+            joinColumns = @JoinColumn(name = "zanro_id"),
+            inverseJoinColumns =  @JoinColumn(name = "filmo_id")
+    )
     private Set<Filmas> zanroFilmai;
 
+
     public Zanras() {
+    }
+
+    public Zanras(int id, String pavadinimas, Set<Filmas> zanroFilmai) {
+        this.id = id;
+        this.pavadinimas = pavadinimas;
+        this.zanroFilmai = zanroFilmai;
     }
 
     public int getId() {

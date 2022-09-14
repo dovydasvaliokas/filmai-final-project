@@ -10,7 +10,7 @@ import java.util.List;
 public interface RezisieriusRepository extends JpaRepository<Rezisierius, Integer> {
 
     Rezisierius findById(int id);
-    Rezisierius findByVardasPavarde(String vardas_pavarde);
+    //Rezisierius findByVardas_Pavarde(String vardas_pavarde);
     List<Rezisierius> findAll();
 
 }
