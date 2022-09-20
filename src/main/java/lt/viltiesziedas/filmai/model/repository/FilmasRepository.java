@@ -16,4 +16,6 @@ public interface FilmasRepository extends JpaRepository<Filmas, Integer> {
     List<Filmas> findByFilmoZanrai(String filmoZanrai);
     List<Filmas> findAll();
 
+    //funkcijas pagal ka ieskome filma
+
 }

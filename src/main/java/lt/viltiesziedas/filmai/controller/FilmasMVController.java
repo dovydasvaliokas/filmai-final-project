@@ -41,4 +41,9 @@ public class FilmasMVController {
         model.addAttribute("aprasymas", filmas.getAprasymas());
         return "filmo_informacija";
     }
+
+    @GetMapping("/filmai/rasti")
+    String rastiFilma(Model model){
+        return "rasti_filma";
+    }
 }
