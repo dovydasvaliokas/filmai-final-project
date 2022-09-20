@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -28,5 +29,18 @@ public class ZanrasMVController {
         model.addAttribute("zanroFilmai", zanras.getZanroFilmai());
         model.addAttribute("zanroPavadinimas", zanras.getPavadinimas());
         return "zanro_filmai";
+    }
+
+    @GetMapping("/zanrai/prideti_zanra")
+    String pridetiZanra(Model model){
+        return "prideti_zanra";
+    }
+
+    @PostMapping("/zanrai/pridetas_zanras")
+    String pridetasZanras(@RequestParam String pavadinimas){
+        Zanras naujasZanras = new Zanras();
+        naujasZanras.setPavadinimas(pavadinimas);
+        zanrasRepository.save(naujasZanras);
+        return "sekmingai_pridetas_zanras";
     }
 }
