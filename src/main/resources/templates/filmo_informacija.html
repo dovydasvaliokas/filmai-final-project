@@ -26,7 +26,7 @@
     <tr>
         <th>Žanrai:</th>
         <td><ul th:each="zanras : ${filmoZanrai}" class="list-group">
-            <li th:text="${zanras.getPavadinimas()}" class="list-group-item"></li>
+            <a th:text="${zanras.getPavadinimas()}" th:href="@{/zanrai/rodyti_filmus/(id=${zanras.getId()})}" class="list-group-item list-group-item-action"></a>
         </ul>
         </td>
     </tr>
