@@ -1,20 +1,26 @@
 package lt.viltiesziedas.filmai.controller;
 
 import lt.viltiesziedas.filmai.model.entity.Filmas;
+import lt.viltiesziedas.filmai.model.entity.Rezisierius;
+import lt.viltiesziedas.filmai.model.repository.RezisieriusRepository;
+import lt.viltiesziedas.filmai.model.repository.ZanrasRepository;
 import lt.viltiesziedas.filmai.model.repository.FilmasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-public class FilmasMVController {
+public class FilmasMVController{
 
     @Autowired
     FilmasRepository filmasRepository;
+    @Autowired
+    ZanrasRepository zanrasRepository;
+    @Autowired
+    RezisieriusRepository rezisieriusRepository;
 
     @GetMapping("/test/sveikinimas")
     String testineFunkcija(Model model, @RequestParam String vardas){
@@ -45,5 +51,22 @@ public class FilmasMVController {
     @GetMapping("/filmai/rasti")
     String rastiFilma(Model model){
         return "rasti_filma";
+    }
+
+    @GetMapping("/filmai/idejimas")
+    String filmoIdejimas(Model model){
+        Filmas filmas = new Filmas();
+        model.addAttribute("filmas", filmas);
+        model.addAttribute("filmoZanrai", zanrasRepository.findAll());
+        return "prideti_filma";
+    }
+
+    @PostMapping("/filmai/pridetas_filmas")
+        String pridetiFilma(@ModelAttribute Filmas pridedamasFilmas, @RequestParam String rastiRezisieriu){
+            Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
+            //exception gal reikia
+            pridedamasFilmas.setFilmoRezisierius(rezisierius);
+            filmasRepository.save(pridedamasFilmas);
+            return "idetas_filmas";
     }
 }

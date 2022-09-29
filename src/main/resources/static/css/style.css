@@ -1,0 +1,11 @@
+h1{
+color:red!important}
+
+.tarpas{
+   margin-right:15px;
+}
+
+.checkbox-isorinis{
+    display:flex;
+    flex-direction:column;
+}

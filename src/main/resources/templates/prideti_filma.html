@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Filmo pridėjimas</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <h1>Naujo filmo pridėjimas</h1>
+    <hr>
+    <h2>Pateikite filmo informaciją</h2>
+
+    <form action="@{/filmai/pridetas_filmas}" th:object="${filmas}" method="POST">
+        <input th:field="*{pavadinimas}" type="text" placeholder="Filmo pavadinimas" class="form-control mb-4 col-4">
+        <input th:field="*{metai}" type="text"  placeholder="Metai, kada išleistas filmas" class="form-control mb-4 col-4">
+        <input th:value="${rezisierius}" type="text"  placeholder="Režisierius" class="form-control mb-4 col-4">
+        <input th:field="*{trukmeMin}" type="text"  placeholder="Trukmė" class="form-control mb-4 col-4">
+        <input th:field="*{imdbRating}" type="text"  placeholder="IMDB Reitingas" class="form-control mb-4 col-4">
+        <textarea th:field="*{aprasymas}" placeholder="Aprašymas" class="form-control mb-4 col-7"></textarea>
+        <label>Žanrai:
+            <input class="mb-4 tarpas" type="checkbox" name="zanrai"
+                   th:each="zanras: ${filmoZanrai}"
+                   th:text="${zanras.getPavadinimas()}"
+                   th:value="${zanras.getId()}"
+                   th:field="*{filmoZanrai}"
+            />
+        </label>
+        <button type="submit" class="btn btn-info col-2">Išsaugokite filmą</button>
+    </form>
+
+    <hr>
+
+    <a th:href="@{/}"> Grįžti atgal</a>
+</div>
+</body>
+</html>
