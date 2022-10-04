@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Filmo pridėjimas</title>
+    <title>Filmo redagavimas</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 <div class="container">
-    <h1>Naujo filmo pridėjimas</h1>
+    <h1>Filmo redagavimas</h1>
     <hr>
-    <h2>Pateikite filmo informaciją</h2>
+    <h2>Laukeliuose pateikite filmo informaciją</h2>
 
     <form th:action="@{/filmai/pridetas_filmas}" th:object="${filmas}" method="POST">
+        <input type="hidden" th:field="*{id}">
         <input th:field="*{pavadinimas}" type="text" placeholder="Filmo pavadinimas" class="form-control mb-4 col-4">
         <input th:field="*{metai}" type="text"  placeholder="Metai, kada išleistas filmas" class="form-control mb-4 col-4">
         <input th:value="${rastiRezisieriu}" name="rastiRezisieriu" type="text"  placeholder="Režisierius" class="form-control mb-4 col-4">
@@ -30,6 +31,7 @@
                    th:field="*{filmoZanrai}"
             />
         </label>
+        <br>
         <input type="submit" value="Išsaugokite filmą" class="btn btn-info col-2">
     </form>
 

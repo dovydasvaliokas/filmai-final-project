@@ -64,9 +64,20 @@ public class FilmasMVController{
     @PostMapping("/filmai/pridetas_filmas")
         String pridetiFilma(@ModelAttribute Filmas pridedamasFilmas, @RequestParam String rastiRezisieriu){
             Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
-            //exception gal reikia
+            System.out.println(rastiRezisieriu);
             pridedamasFilmas.setFilmoRezisierius(rezisierius);
             filmasRepository.save(pridedamasFilmas);
             return "idetas_filmas";
+    }
+
+    @GetMapping("/filmai/filmo_redagavimas/{id}")
+        String redaguotiFilma(Model model, @ModelAttribute Filmas redaguojamasFilmas, @RequestParam String rastiRezisieriu, @PathVariable int id){
+            Filmas filmas = filmasRepository.findById(id);
+            model.addAttribute("filmas", filmas);
+            model.addAttribute("filmoZanrai", zanrasRepository.findAll());
+            Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
+            redaguojamasFilmas.setFilmoRezisierius(rezisierius);
+            filmasRepository.save(redaguojamasFilmas);
+            return "filmo_redagavimas";
     }
 }
