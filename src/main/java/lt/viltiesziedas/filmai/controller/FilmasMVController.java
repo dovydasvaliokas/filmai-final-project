@@ -73,13 +73,20 @@ public class FilmasMVController{
     @GetMapping("/filmai/filmo_redagavimas/{id}")
         String redaguotiFilma(Model model, @PathVariable int id){
             Filmas filmas = filmasRepository.findById(id);
-            model.addAttribute("filmas", filmas);
-            model.addAttribute("filmoZanrai", zanrasRepository.findAll());
-            model.addAttribute("filmoRezisierius", filmas.getFilmoRezisierius());
+            //model.addAttribute("pavadinimas", filmas.getPavadinimas());
+            //model.addAttribute("filmoZanrai", zanrasRepository.findAll());
+            //model.addAttribute("filmoRezisierius", filmas.getFilmoRezisierius());
             //Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
             //redaguojamasFilmas.setFilmoRezisierius(rezisierius);
             //filmasRepository.save(redaguojamasFilmas);
+            model.addAttribute("pavadinimas", filmas.getPavadinimas());
+            model.addAttribute("metai", filmas.getMetai());
+            model.addAttribute("filmoRezisierius", filmas.getFilmoRezisierius());
+            model.addAttribute("filmoZanrai", filmas.getFilmoZanrai());
+            model.addAttribute("trukmeMin", filmas.getTrukmeMin());
+            model.addAttribute("imdbRating", filmas.getImdbRating());
+            model.addAttribute("aprasymas", filmas.getAprasymas());
             System.out.println(filmas);
-            return "filmo_redagavimas";
+            return "filmo_informacija";
     }
 }
