@@ -19,7 +19,7 @@
         <input type="hidden" th:field="*{id}">
         <input th:field="*{pavadinimas}" type="text" placeholder="Filmo pavadinimas" class="form-control mb-4 col-4">
         <input th:field="*{metai}" type="text" placeholder="Metai, kada išleistas filmas" class="form-control mb-4 col-4">
-        <input th:field="*{filmas.getFilmoRezisierius}" type="text" placeholder="Režisierius" class="form-control mb-4 col-4">
+        <input th:value="${rastiRezisieriu}" name="rastiRezisieriu" type="text" placeholder="Režisierius" class="form-control mb-4 col-4"> <!-- Čia blogai buvo. Turėjot užvadinti rastiRezisieriu, nes sekantis puslapis gauna rastiReziseriu. Analogiškai, kaip darėte prideti_filma.html puslapyje -->
         <input th:field="*{trukmeMin}" type="text" placeholder="Trukmė" class="form-control mb-4 col-4">
         <input th:field="*{imdbRating}" type="text"  placeholder="IMDB Reitingas" class="form-control mb-4 col-4">
         <textarea th:field="*{aprasymas}" placeholder="Aprašymas" class="form-control mb-4 col-7"></textarea>
