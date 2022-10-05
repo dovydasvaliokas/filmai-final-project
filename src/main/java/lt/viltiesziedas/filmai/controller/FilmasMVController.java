@@ -71,13 +71,15 @@ public class FilmasMVController{
     }
 
     @GetMapping("/filmai/filmo_redagavimas/{id}")
-        String redaguotiFilma(Model model, @ModelAttribute Filmas redaguojamasFilmas, @RequestParam String rastiRezisieriu, @PathVariable int id){
+        String redaguotiFilma(Model model, @PathVariable int id){
             Filmas filmas = filmasRepository.findById(id);
             model.addAttribute("filmas", filmas);
             model.addAttribute("filmoZanrai", zanrasRepository.findAll());
-            Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
-            redaguojamasFilmas.setFilmoRezisierius(rezisierius);
-            filmasRepository.save(redaguojamasFilmas);
+            model.addAttribute("filmoRezisierius", filmas.getFilmoRezisierius());
+            //Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
+            //redaguojamasFilmas.setFilmoRezisierius(rezisierius);
+            //filmasRepository.save(redaguojamasFilmas);
+            System.out.println(filmas);
             return "filmo_redagavimas";
     }
 }
