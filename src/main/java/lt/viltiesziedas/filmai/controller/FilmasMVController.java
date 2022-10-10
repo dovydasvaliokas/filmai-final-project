@@ -72,21 +72,12 @@ public class FilmasMVController{
 
     @GetMapping("/filmai/filmo_redagavimas/{id}")
         String redaguotiFilma(Model model, @PathVariable int id){
+            System.out.println("Belekas");
             Filmas filmas = filmasRepository.findById(id);
-            //model.addAttribute("pavadinimas", filmas.getPavadinimas());
-            //model.addAttribute("filmoZanrai", zanrasRepository.findAll());
-            //model.addAttribute("filmoRezisierius", filmas.getFilmoRezisierius());
-            //Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
-            //redaguojamasFilmas.setFilmoRezisierius(rezisierius);
-            //filmasRepository.save(redaguojamasFilmas);
-            model.addAttribute("pavadinimas", filmas.getPavadinimas());
-            model.addAttribute("metai", filmas.getMetai());
-            model.addAttribute("filmoRezisierius", filmas.getFilmoRezisierius());
-            model.addAttribute("filmoZanrai", filmas.getFilmoZanrai());
-            model.addAttribute("trukmeMin", filmas.getTrukmeMin());
-            model.addAttribute("imdbRating", filmas.getImdbRating());
-            model.addAttribute("aprasymas", filmas.getAprasymas());
-            System.out.println(filmas);
-            return "filmo_informacija";
+            System.out.println("kitur");
+           // System.out.println(filmas);
+            model.addAttribute("filmas", filmas);               // paduodam filmas objektą dėl visų kitų parametrų, pavadinimas, trukmė, t.t.
+            model.addAttribute("rastiRezisieriu", filmas.getFilmoRezisierius().getVardasPavarde());         // režisierių reikia atskirai paduoti HTML'ui, kadangi tas HTML'as siųs tolesniai controllerio funkcijai (pridetiFilma), o ta funkcija turi gauti režisierių kaip atskirą String, o ne filmas objekto viduje.
+            return "filmo_redagavimas.html";            // čia blogai buvo, jūs ne į tą puslapį controllerį nukreipėt
     }
 }
