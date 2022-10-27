@@ -47,6 +47,7 @@ public class FilmasMVController{
         model.addAttribute("imdbRating", filmas.getImdbRating());
         model.addAttribute("aprasymas", filmas.getAprasymas());
         model.addAttribute("id", filmas.getId());
+        model.addAttribute("filmoId", filmas.getId());
         model.addAttribute("filmoKomentarai", filmas.getFilmoKomentarai());
         Komentaras komentaras = new Komentaras();
         model.addAttribute("komentaras", komentaras);

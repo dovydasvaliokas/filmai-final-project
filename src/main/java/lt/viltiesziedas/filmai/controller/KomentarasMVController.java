@@ -24,10 +24,11 @@ public class KomentarasMVController {
     @Autowired
     VartotojasRepository vartotojasRepository;
 
-    @PostMapping("/komentarai/naujas_komentaras/{id}")
-    String issaugotiKomentara(Model model, @ModelAttribute Komentaras pridedamasKomentaras, @PathVariable int id){
+    @PostMapping("/komentarai/naujas_komentaras/{filmoId}")
+    String issaugotiKomentara(Model model, @ModelAttribute Komentaras pridedamasKomentaras, @PathVariable int filmoId){
+        System.out.println("pridedamasKomentaras = " + pridedamasKomentaras.getId());
         pridedamasKomentaras.setVartotojoKomentaras(vartotojasRepository.findById(1));
-        Filmas filmas = filmasRepository.findById(id);
+        Filmas filmas = filmasRepository.findById(filmoId);
         pridedamasKomentaras.setKomentarasFilmui(filmas);
         komentarasRepository.save(pridedamasKomentaras);
         model.addAttribute("pavadinimas", filmas.getPavadinimas());

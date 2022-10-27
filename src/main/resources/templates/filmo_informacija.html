@@ -55,7 +55,7 @@
 <br>
 
 <div>
-    <form th:action="@{'/komentarai/naujas_komentaras/' +${id}}" th:object="${komentaras}" method="POST">
+    <form th:action="@{'/komentarai/naujas_komentaras/' +${filmoId}}" th:object="${komentaras}" method="POST">
         <input type="text" th:field="*{tekstas}" placeholder="Rašykite komentarą" class="form-control mb-4 col-7"></input>
     <input type="submit" value="Pridėti komentarą" class="btn btn-primary btn-sm">
     </form>
