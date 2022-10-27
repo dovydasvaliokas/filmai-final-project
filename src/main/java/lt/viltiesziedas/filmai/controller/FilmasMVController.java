@@ -49,6 +49,7 @@ public class FilmasMVController{
         model.addAttribute("id", filmas.getId());
         model.addAttribute("filmoKomentarai", filmas.getFilmoKomentarai());
         Komentaras komentaras = new Komentaras();
+        model.addAttribute("komentaras", komentaras);
         return "filmo_informacija";
     }
 
