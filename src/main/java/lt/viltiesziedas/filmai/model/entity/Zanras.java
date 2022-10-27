@@ -3,6 +3,7 @@ package lt.viltiesziedas.filmai.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -61,7 +62,19 @@ public class Zanras {
         return "Zanras{" +
                 "id=" + id +
                 ", pavadinimas='" + pavadinimas + '\'' +
-                ", zanroFilmai=" + zanroFilmai +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Zanras zanras = (Zanras) o;
+        return id == zanras.id && Objects.equals(pavadinimas, zanras.pavadinimas) && Objects.equals(zanroFilmai, zanras.zanroFilmai);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, pavadinimas, zanroFilmai);
     }
 }

@@ -1,5 +1,7 @@
 package lt.viltiesziedas.filmai.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -22,6 +24,10 @@ public class Filmas {
     @JoinColumn(name = "rezisieriaus_id")
     private Rezisierius filmoRezisierius;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "komentarasFilmui")
+    private Set<Komentaras> filmoKomentarai;
+
     @ManyToMany
     @JoinTable(
             name = "filmo_zanrai",
@@ -33,7 +39,7 @@ public class Filmas {
     public Filmas() {
     }
 
-    public Filmas(int id, String pavadinimas, short metai, float imdbRating, short trukmeMin, String aprasymas, Rezisierius filmoRezisierius, Set<Zanras> filmoZanrai) {
+    public Filmas(int id, String pavadinimas, short metai, float imdbRating, short trukmeMin, String aprasymas, Rezisierius filmoRezisierius, Set<Zanras> filmoZanrai, Set<Komentaras> filmoKomentarai) {
         this.id = id;
         this.pavadinimas = pavadinimas;
         this.metai = metai;
@@ -42,6 +48,7 @@ public class Filmas {
         this.aprasymas = aprasymas;
         this.filmoRezisierius = filmoRezisierius;
         this.filmoZanrai = filmoZanrai;
+        this.filmoKomentarai = filmoKomentarai;
     }
 
     public int getId() {
@@ -108,6 +115,14 @@ public class Filmas {
         this.filmoZanrai = filmoZanrai;
     }
 
+    public Set<Komentaras> getFilmoKomentarai() {
+        return filmoKomentarai;
+    }
+
+    public void setFilmoKomentarai(Set<Komentaras> filmoKomentarai) {
+        this.filmoKomentarai = filmoKomentarai;
+    }
+
     @Override
     public String toString() {
         return "Filmas{" +
@@ -117,8 +132,7 @@ public class Filmas {
                 ", imdbRating=" + imdbRating +
                 ", trukmeMin=" + trukmeMin +
                 ", aprasymas='" + aprasymas + '\'' +
-                ", filmoRezisierius=" + filmoRezisierius +
-                ", filmoZanrai=" + filmoZanrai +
                 '}';
     }
+    //komentaras toString ar reikes, ar nesibugins
 }

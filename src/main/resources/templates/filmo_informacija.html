@@ -43,5 +43,32 @@
         <td th:text="${aprasymas}"></td>
     </tr>
 </table>
+
+
+<form th:action="@{'/filmai/filmo_redagavimas/' +${id}}" method="get">
+    <input type="submit" value="Redaguoti filmo informaciją">
+</form>
+<br>
+<form th:action="@{'/filmai/istrinti_filma/' +${id}}" method="post">
+    <input type="submit" value="Ištrinti filmą">
+</form>
+<br>
+
+<div>
+    <form th:action="@{'/komentarai/naujas_komentaras/' +${id}}" th:object="${komentaras}" method="POST">
+        <textarea th:field="*{komentaras}" placeholder="Rašykite komentarą" class="form-control mb-4 col-7"></textarea>
+    <input type="submit" value="Pridėti komentarą" class="btn btn-primary btn-sm">
+    </form>
+</div>
+
+<div th:each="komentaras : ${filmoKomentarai}" class="card w-75" >
+    <h5 class="card-header" th:text="${komentaras.getVartotojoKomentaras().getUsername()}"></h5>
+    <div class="card-body">
+        <p class="card-text" th:text="${komentaras.getKomentaras()}"></p>
+    </div>
+</div>
+
+
+
 </body>
 </html>

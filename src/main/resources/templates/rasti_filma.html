@@ -10,8 +10,18 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class="container d-flex flex-column  align-items-center">
+<div class="container d-flex flex-column align-items-center">
+    <br>
+<form  th:action="@{/zanrai/visi_zanrai}" method="get">
+    <button class="btn btn-secondary" type="submit">
+        Ieškoti pagal žanrą
+    </button>
+</form>
+    <br>
+</div>
+<div class="container d-flex flex-column align-items-center">
     <div class="row col-8">
+        <br>
         <div class="input-group">
             <form  th:action="@{/filmai/informacija/}" class="d-flex w-100" method="get">
                 <input th:value="${pavadinimas}" type="text" name="pavadinimas" class="form-control" placeholder="Įveskite filmo pavadinimą...">

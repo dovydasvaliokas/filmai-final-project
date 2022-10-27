@@ -23,13 +23,15 @@
         <input th:field="*{trukmeMin}" type="text" placeholder="Trukmė" class="form-control mb-4 col-4">
         <input th:field="*{imdbRating}" type="text"  placeholder="IMDB Reitingas" class="form-control mb-4 col-4">
         <textarea th:field="*{aprasymas}" placeholder="Aprašymas" class="form-control mb-4 col-7"></textarea>
-        <label>Žanrai:
-            <input class="mb-4 tarpas" type="checkbox" name="zanrai"
-                   th:each="zanras: ${filmoZanrai}"
-                   th:text="${zanras.getPavadinimas()}"
-                   th:value="${zanras.getId()}"
-                   th:field="*{filmoZanrai}"
-            />
+        <label><strong>Žanrai:</strong>
+            <br>
+            <div th:each="zanras: ${filmoZanrai}">
+                <span th:text="${zanras.getPavadinimas()}"></span>
+                <input type="checkbox" name="zanrai" class="checkboxai"
+                th:value="${zanras.getId()}"
+                th:field="*{filmoZanrai}"
+                />
+            </div>
         </label>
         <br>
         <input type="submit" value="Išsaugokite filmą" class="btn btn-info col-2">

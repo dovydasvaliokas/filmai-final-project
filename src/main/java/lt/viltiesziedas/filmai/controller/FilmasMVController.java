@@ -1,6 +1,7 @@
 package lt.viltiesziedas.filmai.controller;
 
 import lt.viltiesziedas.filmai.model.entity.Filmas;
+import lt.viltiesziedas.filmai.model.entity.Komentaras;
 import lt.viltiesziedas.filmai.model.entity.Rezisierius;
 import lt.viltiesziedas.filmai.model.repository.RezisieriusRepository;
 import lt.viltiesziedas.filmai.model.repository.ZanrasRepository;
@@ -45,10 +46,13 @@ public class FilmasMVController{
         model.addAttribute("trukmeMin", filmas.getTrukmeMin());
         model.addAttribute("imdbRating", filmas.getImdbRating());
         model.addAttribute("aprasymas", filmas.getAprasymas());
+        model.addAttribute("id", filmas.getId());
+        model.addAttribute("filmoKomentarai", filmas.getFilmoKomentarai());
+        Komentaras komentaras = new Komentaras();
         return "filmo_informacija";
     }
 
-    @GetMapping("/filmai/rasti")
+    @GetMapping("/filmai/paieska")
     String rastiFilma(Model model){
         return "rasti_filma";
     }
@@ -64,7 +68,6 @@ public class FilmasMVController{
     @PostMapping("/filmai/pridetas_filmas")
         String pridetiFilma(@ModelAttribute Filmas pridedamasFilmas, @RequestParam String rastiRezisieriu){
             Rezisierius rezisierius = rezisieriusRepository.findByVardasPavarde(rastiRezisieriu);
-            System.out.println(rastiRezisieriu);
             pridedamasFilmas.setFilmoRezisierius(rezisierius);
             filmasRepository.save(pridedamasFilmas);
             return "idetas_filmas";
@@ -74,9 +77,19 @@ public class FilmasMVController{
         String redaguotiFilma(Model model, @PathVariable int id){
             System.out.println("Belekas");
             Filmas filmas = filmasRepository.findById(id);
+            System.out.println("Belekas2");
             model.addAttribute("filmas", filmas);               // paduodam filmas objektą dėl visų kitų parametrų, pavadinimas, trukmė, t.t.
+            System.out.println("Belekas3");
             model.addAttribute("rastiRezisieriu", filmas.getFilmoRezisierius().getVardasPavarde());         // režisierių reikia atskirai paduoti HTML'ui, kadangi tas HTML'as siųs tolesniai controllerio funkcijai (pridetiFilma), o ta funkcija turi gauti režisierių kaip atskirą String, o ne filmas objekto viduje.
+            System.out.println("Belekas4");
             model.addAttribute("filmoZanrai", zanrasRepository.findAll());
+            System.out.println("Belekas5");
             return "filmo_redagavimas.html";            // čia blogai buvo, jūs ne į tą puslapį controllerį nukreipėt
+    }
+
+    @PostMapping("/filmai/istrinti_filma/{id}")
+        String istrintiFilma(Model model, @PathVariable int id){
+        filmasRepository.delete(filmasRepository.findById(id));
+        return "istrintas_filmas";
     }
 }

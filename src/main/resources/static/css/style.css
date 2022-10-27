@@ -5,7 +5,7 @@ color:red!important}*/
    margin-right:15px;
 }
 
-.checkbox-isorinis{
-    display:flex;
-    flex-direction:column;
+.checkboxai {
+    width: 25px;
+    height: 25px;
 }
