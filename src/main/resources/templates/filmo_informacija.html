@@ -56,7 +56,7 @@
 
 <div>
     <form th:action="@{'/komentarai/naujas_komentaras/' +${id}}" th:object="${komentaras}" method="POST">
-        <textarea th:field="*{komentaras}" placeholder="Rašykite komentarą" class="form-control mb-4 col-7"></textarea>
+        <input type="text" th:field="*{tekstas}" placeholder="Rašykite komentarą" class="form-control mb-4 col-7"></input>
     <input type="submit" value="Pridėti komentarą" class="btn btn-primary btn-sm">
     </form>
 </div>
@@ -64,7 +64,7 @@
 <div th:each="komentaras : ${filmoKomentarai}" class="card w-75" >
     <h5 class="card-header" th:text="${komentaras.getVartotojoKomentaras().getUsername()}"></h5>
     <div class="card-body">
-        <p class="card-text" th:text="${komentaras.getKomentaras()}"></p>
+        <p class="card-text" th:text="${komentaras.getTekstas()}"></p>
     </div>
 </div>
 

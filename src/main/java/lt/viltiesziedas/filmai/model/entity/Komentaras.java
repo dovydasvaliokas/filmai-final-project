@@ -10,7 +10,7 @@ public class Komentaras {
     private int id;
 
     @Column(length = 3000)
-    private String komentaras;
+    private String tekstas;
 
     @ManyToOne
     @JoinColumn(name = "vartotojo_id")
@@ -23,9 +23,9 @@ public class Komentaras {
     public Komentaras() {
     }
 
-    public Komentaras(int id, String komentaras, Vartotojas vartotojoKomentaras, Filmas komentarasFilmui) {
+    public Komentaras(int id, String tekstas, Vartotojas vartotojoKomentaras, Filmas komentarasFilmui) {
         this.id = id;
-        this.komentaras = komentaras;
+        this.tekstas = tekstas;
         this.vartotojoKomentaras = vartotojoKomentaras;
         this.komentarasFilmui = komentarasFilmui;
     }
@@ -38,12 +38,12 @@ public class Komentaras {
         this.id = id;
     }
 
-    public String getKomentaras() {
-        return komentaras;
+    public String getTekstas() {
+        return tekstas;
     }
 
-    public void setKomentaras(String komentaras) {
-        this.komentaras = komentaras;
+    public void setTekstas(String tekstas) {
+        this.tekstas = tekstas;
     }
 
     public Vartotojas getVartotojoKomentaras() {
@@ -66,7 +66,7 @@ public class Komentaras {
     public String toString() {
         return "Komentaras{" +
                 "id=" + id +
-                ", komentaras='" + komentaras + '\'' +
+                ", komentaras='" + tekstas + '\'' +
                 ", vartotojoKomentaras=" + vartotojoKomentaras +
                 ", komentarasFilmui=" + komentarasFilmui +
                 '}';
